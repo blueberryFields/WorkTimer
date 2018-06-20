@@ -9,6 +9,7 @@ public class WorkTimerController implements ActionListener {
 	private WorkTimerView view;
 	private Timer t;
 
+	// Konstruktor
 	public WorkTimerController() {
 		model = new WorkTimerModel();
 		view = new WorkTimerView();
@@ -18,10 +19,11 @@ public class WorkTimerController implements ActionListener {
 
 	public void initWorkTimerView() {
 		view.getStartStopButton().addActionListener(e -> start());
+		view.getSettingsButton().addActionListener(e -> settings());
 	}
 
 	public void start() {
-		if (view.getRunning() == false) {
+		if (view.isRunning() == false) {
 			setWorkTime();
 			setPausTime();
 			model.setTime();
@@ -37,14 +39,18 @@ public class WorkTimerController implements ActionListener {
 		}
 	}
 
+	public void settings() {
+			view.paintSettingsPanel();
+	}
+
 	public int getWorkMin() {
-		int workMin;
-		return workMin = Integer.parseInt(view.getWorkMin());
+		// int workMin;
+		return Integer.parseInt(view.getWorkMin());
 	}
 
 	public int getPausMin() {
-		int pausMin;
-		return pausMin = Integer.parseInt(view.getPausMin());
+		// int pausMin;
+		return Integer.parseInt(view.getPausMin());
 	}
 
 	public void setWorkTime() {
