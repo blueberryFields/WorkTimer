@@ -1,7 +1,5 @@
 
 import java.io.File;
-import java.time.format.DateTimeFormatter;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -12,9 +10,6 @@ public class WorkTimerModel {
 	private int sek;
 	private int min;
 
-	// DateTimeFormatter sekFormat = DateTimeFormatter.ofPattern("s");
-	// DateTimeFormatter minFormat = DateTimeFormatter.ofPattern("m");
-	// DateTimeFormatter hourFormat = DateTimeFormatter.ofPattern("H");
 	File alarmSound = new File("src/resources/198841__bone666138__analog-alarm-clock.wav");
 
 	public WorkTimerModel() {

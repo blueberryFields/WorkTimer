@@ -6,20 +6,21 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 
 public class WorkTimerView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4709189419252856844L;
+
+	//Create allround stuff
 	private String[] minArr = new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
 			"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
 			"30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47",
@@ -28,6 +29,8 @@ public class WorkTimerView extends JFrame {
 	private Font timerFont = new Font("Helvetica", Font.PLAIN, 42);
 	private Font buttonFont = new Font("Helvetica", Font.PLAIN, 36);
 	private Font editorFont = new Font("Helvetica", Font.PLAIN, 12);
+	
+	//Create stuff for frontpanel
 	private JButton startStop = new JButton("START");
 	private JTextField workPaus = new JTextField("PAUS");
 	private JComboBox<String> workMin = new JComboBox<String>(minArr);
@@ -36,15 +39,16 @@ public class WorkTimerView extends JFrame {
 	private JTextArea workEditor = new JTextArea("Working time");
 	private JTextArea pausEditor = new JTextArea("Pausing time");
 	private Dimension buttonDimension = new Dimension(140, 50);
-
-	private JPanel panel = new JPanel();
-	private JPanel editorPanel = new JPanel();
-
-	private WorkTimerModel c = new WorkTimerModel();
-
 	private Boolean running = false;
 
-	Scanner in = new Scanner(System.in);
+	//private JPanel frontPanel = new JPanel();
+	private JPanel frontPanel = new JPanel();
+
+	//private WorkTimerModel c = new WorkTimerModel();
+
+	
+
+	//Scanner in = new Scanner(System.in);
 
 	// Konstruktor
 	public WorkTimerView() {
@@ -69,22 +73,22 @@ public class WorkTimerView extends JFrame {
 
 		workEditor.setBackground(Color.WHITE);
 		pausEditor.setBackground(Color.WHITE);
-		editorPanel.setLayout(new GridBagLayout());
-		editorPanel.setBackground(Color.WHITE);
+		frontPanel.setLayout(new GridBagLayout());
+		frontPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(0, 5, 0, 5);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		editorPanel.add(workEditor, gbc);
+		frontPanel.add(workEditor, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		editorPanel.add(pausEditor, gbc);
+		frontPanel.add(pausEditor, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		editorPanel.add(workMin, gbc);
+		frontPanel.add(workMin, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 2;
-		editorPanel.add(pausMin, gbc);
+		frontPanel.add(pausMin, gbc);
 
 		// Set layout and color and add stuff to Frame
 		setTitle("Work Timer");
@@ -93,7 +97,7 @@ public class WorkTimerView extends JFrame {
 		setLayout(new BorderLayout());
 
 		add(startStop, BorderLayout.LINE_START);
-		add(editorPanel, BorderLayout.CENTER);
+		add(frontPanel, BorderLayout.CENTER);
 		add(workPaus, BorderLayout.LINE_END);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
@@ -102,7 +106,7 @@ public class WorkTimerView extends JFrame {
 
 	public void start() {
 		running = true;
-		remove(editorPanel);
+		remove(frontPanel);
 		add(timer, BorderLayout.CENTER);
 		startStop.setText("STOP");
 		workPaus.setText("WORK");
@@ -113,7 +117,7 @@ public class WorkTimerView extends JFrame {
 	public void stop() {
 		running = false;
 		remove(timer);
-		add(editorPanel);
+		add(frontPanel);
 		startStop.setText("START");
 		workPaus.setText("PAUS");
 		workPaus.setBackground(Color.RED);
