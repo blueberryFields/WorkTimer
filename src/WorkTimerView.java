@@ -81,7 +81,9 @@ public class WorkTimerView extends JFrame {
 		workEditor.setBackground(mainColor);
 		pausEditor.setBackground(mainColor);
 		workMin.setEditable(false);
+		workMin.setSelectedItem("25");
 		pausMin.setEditable(false);
+		pausMin.setSelectedItem("05");
 		frontPanel.setLayout(new GridBagLayout());
 		frontPanel.setBackground(mainColor);		
 		gbc.insets = new Insets(0, 5, 0, 5);
