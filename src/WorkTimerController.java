@@ -19,7 +19,6 @@ public class WorkTimerController implements ActionListener {
 
 	public void initWorkTimerView() {
 		view.getStartStopButton().addActionListener(e -> start());
-		view.getSettingsButton().addActionListener(e -> settings());
 	}
 
 	public void start() {
@@ -39,17 +38,11 @@ public class WorkTimerController implements ActionListener {
 		}
 	}
 
-	public void settings() {
-			view.paintSettingsPanel();
-	}
-
 	public int getWorkMin() {
-		// int workMin;
 		return Integer.parseInt(view.getWorkMin());
 	}
 
 	public int getPausMin() {
-		// int pausMin;
 		return Integer.parseInt(view.getPausMin());
 	}
 
