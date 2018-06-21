@@ -27,15 +27,35 @@ public class WorkTimerController implements ActionListener {
 			setPausTime();
 			model.setTime();
 			model.setWorkOrNot(true);
+			model.setRingTone(view.getRingToneChoice());
+			setPopUp(view.getPopUpCheckBox());
+			view.disableSettingStrip();
 			view.setTimer(model.toString());
 			view.start();
 			t.start();
 		} else {
 			view.stop();
+			view.enableSettingsStrip();
 			t.stop();
 			model.setWorkOrNot(false);
 			model.initMinAndSec();
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		model.tick();
+		view.setTimer(model.toString());
+		model.checkTimer();
+		if (model.checkWorkOrNot() == true) {
+			view.setWorkLabel();
+		} else {
+			view.setPausLabel();
+		}
+	}
+
+	public void setRingTone(int index) {
+		model.setRingTone(index);
 	}
 
 	public int getWorkMin() {
@@ -54,16 +74,12 @@ public class WorkTimerController implements ActionListener {
 		model.setPausingTime(getPausMin());
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		model.tick();
-		view.setTimer(model.toString());
-		model.checkTimer();
-		if (model.checkWorkOrNot() == true) {
-			view.setWorkLabel();
-		} else {
-			view.setPausLabel();
-		}
+	public void setPopUp(boolean popUp) {
+		model.setPopUp(popUp);
 	}
+
+	// public void popUp(boolean workOrNot) {
+	// view.popUp(workOrNot);
+	// }
 
 }

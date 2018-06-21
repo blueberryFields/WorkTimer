@@ -2,6 +2,7 @@
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
 
 public class WorkTimerModel {
 	private int workingTime;
@@ -9,9 +10,13 @@ public class WorkTimerModel {
 	private Boolean workOrNot = false;
 	private int sek;
 	private int min;
+	// private boolean loopAndPopUp;
+	private File alarmSound;
+	private boolean popUp = false;
+	private int loop = Clip.LOOP_CONTINUOUSLY;
+	private Clip clip;
 
-	File alarmSound = new File("src/resources/198841__bone666138__analog-alarm-clock.wav");
-
+	// Konstruktor
 	public WorkTimerModel() {
 		initMinAndSec();
 	}
@@ -26,22 +31,58 @@ public class WorkTimerModel {
 
 	public void checkTimer() {
 		if (min == 0 && sek == 0) {
-			try {
-				Clip clip = AudioSystem.getClip();
-				clip.open(AudioSystem.getAudioInputStream(alarmSound));
-				clip.start();
-			} catch (Exception e) {
-				System.out.println("Error when loading audioclip");
-			}
-			if (workOrNot == false) {
-				workOrNot = true;
-				setTime();
+			if (popUp == false) {
+				try {
+					clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(alarmSound));
+					clip.start();
+				} catch (Exception e) {
+					System.out.println("Error when loading audioclip");
+				}
+				if (workOrNot == false) {
+					workOrNot = true;
+					setTime();
+				} else {
+					workOrNot = false;
+					setTime();
+				}
 			} else {
-				workOrNot = false;
-				setTime();
+				try {
+					clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(alarmSound));
+					clip.loop(loop);
+				} catch (Exception e) {
+					System.out.println("Error when loading audioclip");
+				}
+				if (workOrNot == false) {
+					workOrNot = true;
+					setTime();
+				} else {
+					workOrNot = false;
+					setTime();
+				}
+				if (workOrNot == true) {
+					JOptionPane.showMessageDialog(null, "Time for Paus!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Time for work!");
+				}
+				clip.stop();
 			}
 		}
+	}
 
+	public void setRingTone(int index) {
+		switch (index) {
+		case 0:
+			alarmSound = new File("src/resources/analog_ringtone.wav");
+			break;
+		case 1:
+			alarmSound = new File("src/resources/digital_ringtone.wav");
+			break;
+		case 2:
+			alarmSound = new File("src/resources/spacey_ringtone.aiff");
+			break;
+		}
 	}
 
 	public boolean checkWorkOrNot() {
@@ -66,8 +107,8 @@ public class WorkTimerModel {
 	public void setPausingTime(int pausTime) {
 		pausingTime = pausTime;
 	}
-	
-	public void initMinAndSec(){
+
+	public void initMinAndSec() {
 		sek = 0;
 		min = 0;
 	}
@@ -88,6 +129,8 @@ public class WorkTimerModel {
 		return s;
 	}
 
-	
+	public void setPopUp(boolean popUp) {
+		this.popUp = popUp;
+	}
 
 }

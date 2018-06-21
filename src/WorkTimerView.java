@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -29,7 +30,6 @@ public class WorkTimerView extends JFrame {
 	private Font buttonFont = new Font("Helvetica", Font.PLAIN, 36);
 	private Font editorFont = new Font("Helvetica", Font.PLAIN, 12);
 	private Font settingsFont = new Font("Helvetica", Font.PLAIN, 13);
-	//private Dimension frameDimension = new Dimension(550, 100);
 	
 	//Create stuff for frontpanel
 	private JButton startStop = new JButton("START");
@@ -50,11 +50,8 @@ public class WorkTimerView extends JFrame {
 	private String[] ringToneChoises = new String[] {"Analog Ringtone", "Digital Ringtone", "Spacey Ringtone"};
 	private JPanel settingsPanel = new JPanel();
 	private JButton returnButton = new JButton("Return");
-	private JPanel ringTonePanel = new JPanel();
-	private JTextArea ringTone = new JTextArea("Ringtone:");
 	private JComboBox<String> ringToneChoice = new JComboBox<String>(ringToneChoises);
-	private JPanel popUpPanel = new JPanel();
-	private JTextArea popUp = new JTextArea("Use pop-up and loop ringtone:");	
+	private JTextArea popUp = new JTextArea("Use pop-up and loop alarm:");	
 	private JCheckBox popUpCheckBox = new JCheckBox();
 	
 	
@@ -111,7 +108,7 @@ public class WorkTimerView extends JFrame {
 		
 		settingsPanel.setBackground(mainColor);
 		settingsPanel.setLayout(new GridBagLayout());
-		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.insets = new Insets(0, 5, 0, 5);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		settingsPanel.add(ringToneChoice, gbc);
@@ -210,5 +207,33 @@ public class WorkTimerView extends JFrame {
 	
 	public JButton getReturnButton() {
 		return returnButton;
+	}
+	
+	public int getRingToneChoice () {
+		return ringToneChoice.getSelectedIndex();
+	}
+	
+	public boolean getPopUpCheckBox() {
+		return popUpCheckBox.isSelected();
+	}
+	
+	public void enableSettingsStrip() {
+		popUpCheckBox.setEnabled(true);
+		ringToneChoice.setEnabled(true);
+		popUp.setForeground(Color.BLACK);
+	}
+	
+	public void  disableSettingStrip() {
+		popUpCheckBox.setEnabled(false);
+		ringToneChoice.setEnabled(false);
+		popUp.setForeground(Color.GRAY);
+	}
+	
+	public void popUp(boolean workOrNot) {
+		if (workOrNot == true){
+			JOptionPane.showMessageDialog(null, "Time for paus!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Time for work!");
+		}
 	}
 }
