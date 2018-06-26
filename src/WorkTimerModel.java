@@ -62,9 +62,9 @@ public class WorkTimerModel {
 					setTime();
 				}
 				if (workOrNot == true) {
-					JOptionPane.showMessageDialog(null, "Time for Paus!");
-				} else {
 					JOptionPane.showMessageDialog(null, "Time for work!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Time for paus!");
 				}
 				clip.stop();
 			}
