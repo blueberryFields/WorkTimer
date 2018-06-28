@@ -23,7 +23,13 @@ public class WorkTimerController implements ActionListener {
 	}
 
 	public void start() {
-		if (view.isRunning() == false) {
+		if (view.isRunning()) {
+			view.stop();
+			view.enableSettingsStrip();
+			t.stop();
+			model.setWorkOrNot(false);
+			model.initMinAndSec();		
+		} else {
 			setWorkTime();
 			setPausTime();
 			model.setTime();
@@ -34,12 +40,6 @@ public class WorkTimerController implements ActionListener {
 			view.setTimer(model.toString());
 			view.start();
 			t.start();
-		} else {
-			view.stop();
-			view.enableSettingsStrip();
-			t.stop();
-			model.setWorkOrNot(false);
-			model.initMinAndSec();
 		}
 	}
 
@@ -78,9 +78,4 @@ public class WorkTimerController implements ActionListener {
 	public void setPopUp(boolean popUp) {
 		model.setPopUp(popUp);
 	}
-
-	// public void popUp(boolean workOrNot) {
-	// view.popUp(workOrNot);
-	// }
-
 }

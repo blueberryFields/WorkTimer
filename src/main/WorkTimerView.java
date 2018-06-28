@@ -231,12 +231,4 @@ public class WorkTimerView extends JFrame {
 		ringToneChoice.setEnabled(false);
 		popUp.setForeground(Color.GRAY);
 	}
-	
-	public void popUp(boolean workOrNot) {
-		if (workOrNot == true){
-			JOptionPane.showMessageDialog(null, "Time for paus!");
-		} else {
-			JOptionPane.showMessageDialog(null, "Time for work!");
-		}
-	}
 }

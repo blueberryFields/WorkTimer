@@ -13,8 +13,6 @@ public class WorkTimerModel {
 	private String alarmSound;
 	private boolean popUp = false;
 	private Clip clip;
-	
-	
 
 	// Konstruktor
 	public WorkTimerModel() {
@@ -31,22 +29,7 @@ public class WorkTimerModel {
 
 	public void checkTimer() {
 		if (min == 0 && sek == 0) {
-			if (popUp == false) {
-				try {
-					clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
-					clip.start();
-				} catch (Exception e) {
-					System.out.println("Error when loading audioclip");
-				}
-				if (workOrNot == false) {
-					workOrNot = true;
-					setTime();
-				} else {
-					workOrNot = false;
-					setTime();
-				}
-			} else {
+			if (popUp) {
 				try {
 					clip = AudioSystem.getClip();
 					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
@@ -67,6 +50,22 @@ public class WorkTimerModel {
 					JOptionPane.showMessageDialog(null, "Time for paus!");
 				}
 				clip.stop();
+
+			} else {
+				try {
+					clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+					clip.start();
+				} catch (Exception e) {
+					System.out.println("Error when loading audioclip");
+				}
+				if (workOrNot) {
+					setTime();
+					workOrNot = false;				
+				} else {
+					setTime();
+					workOrNot = true;
+				}
 			}
 		}
 	}
@@ -94,10 +93,10 @@ public class WorkTimerModel {
 	}
 
 	public void setTime() {
-		if (workOrNot == false) {
-			min = workingTime;
-		} else
+		if (workOrNot) {
 			min = pausingTime;
+		} else
+			min = workingTime;
 	}
 
 	public void setWorkingTime(int workTime) {
