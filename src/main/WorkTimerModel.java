@@ -30,43 +30,54 @@ public class WorkTimerModel {
 	public void checkTimer() {
 		if (min == 0 && sek == 0) {
 			if (popUp) {
-				try {
-					clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
-					clip.loop(clip.LOOP_CONTINUOUSLY);
-				} catch (Exception e) {
-					System.out.println("Error when loading audioclip");
-				}
-				if (workOrNot == false) {
-					workOrNot = true;
-					setTime();
-				} else {
-					workOrNot = false;
-					setTime();
-				}
-				if (workOrNot == true) {
-					JOptionPane.showMessageDialog(null, "Time for work!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Time for paus!");
-				}
-				clip.stop();
-
+				setOffAlarmWhitPopUp();
 			} else {
-				try {
-					clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
-					clip.start();
-				} catch (Exception e) {
-					System.out.println("Error when loading audioclip");
-				}
-				if (workOrNot) {
-					setTime();
-					workOrNot = false;				
-				} else {
-					setTime();
-					workOrNot = true;
-				}
+				setOffAlarm();
 			}
+		}
+	}
+
+	private void setOffAlarm() {
+		try {
+			clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+			clip.start();
+		} catch (Exception e) {
+			System.out.println("Error when loading audioclip");
+		}
+		if (workOrNot) {
+			setTime();
+			workOrNot = false;
+		} else {
+			setTime();
+			workOrNot = true;
+		}
+	}
+
+	private void setOffAlarmWhitPopUp() {
+		try {
+			clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (Exception e) {
+			System.out.println("Error when loading audioclip");
+		}
+		if (workOrNot) {
+			setTime();
+			workOrNot = false;
+		} else {
+			setTime();
+			workOrNot = true;
+		}
+		showMessage(workOrNot);
+		clip.stop();
+	}
+
+	public void showMessage(boolean workOrNot) {
+		if (workOrNot) {
+			JOptionPane.showMessageDialog(null, "Time for work!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Time for paus!");
 		}
 	}
 

@@ -1,4 +1,5 @@
 package main;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,7 +29,7 @@ public class WorkTimerController implements ActionListener {
 			view.enableSettingsStrip();
 			t.stop();
 			model.setWorkOrNot(false);
-			model.initMinAndSec();		
+			model.initMinAndSec();
 		} else {
 			setWorkTime();
 			setPausTime();
