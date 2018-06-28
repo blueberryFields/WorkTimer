@@ -1,5 +1,5 @@
+package main;
 
-import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
@@ -10,11 +10,11 @@ public class WorkTimerModel {
 	private Boolean workOrNot = false;
 	private int sek;
 	private int min;
-	// private boolean loopAndPopUp;
-	private File alarmSound;
+	private String alarmSound;
 	private boolean popUp = false;
-	private int loop = Clip.LOOP_CONTINUOUSLY;
 	private Clip clip;
+	
+	
 
 	// Konstruktor
 	public WorkTimerModel() {
@@ -34,7 +34,7 @@ public class WorkTimerModel {
 			if (popUp == false) {
 				try {
 					clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(alarmSound));
+					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
 					clip.start();
 				} catch (Exception e) {
 					System.out.println("Error when loading audioclip");
@@ -49,8 +49,8 @@ public class WorkTimerModel {
 			} else {
 				try {
 					clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(alarmSound));
-					clip.loop(loop);
+					clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+					clip.loop(clip.LOOP_CONTINUOUSLY);
 				} catch (Exception e) {
 					System.out.println("Error when loading audioclip");
 				}
@@ -74,13 +74,13 @@ public class WorkTimerModel {
 	public void setRingTone(int index) {
 		switch (index) {
 		case 0:
-			alarmSound = new File("src/resources/analog_ringtone.wav");
+			alarmSound = "/resources/analog_ringtone.wav";
 			break;
 		case 1:
-			alarmSound = new File("src/resources/digital_ringtone.wav");
+			alarmSound = "/resources/digital_ringtone.wav";
 			break;
 		case 2:
-			alarmSound = new File("src/resources/spacey_ringtone.aiff");
+			alarmSound = "/resources/spacey_ringtone.aiff";
 			break;
 		}
 	}
