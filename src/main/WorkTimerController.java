@@ -9,6 +9,7 @@ public class WorkTimerController implements ActionListener {
 	private WorkTimerModel model;
 	private WorkTimerView view;
 	private Timer t;
+	private int cycleCounter = 0;
 
 	// Konstruktor
 	public WorkTimerController() {
@@ -48,6 +49,7 @@ public class WorkTimerController implements ActionListener {
 		model.tick();
 		view.setTimer(model.toString());
 		model.checkTimer();
+		view.setCycles(model.getCycleCounter());
 		if (model.checkWorkOrNot() == true) {
 			view.setWorkLabel();
 		} else {

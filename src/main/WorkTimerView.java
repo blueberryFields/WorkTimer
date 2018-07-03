@@ -53,6 +53,8 @@ public class WorkTimerView extends JFrame {
 	private JComboBox<String> ringToneChoice = new JComboBox<String>(ringToneChoises);
 	private JTextArea popUp = new JTextArea("Use pop-up and loop alarm:");
 	private JCheckBox popUpCheckBox = new JCheckBox();
+	private JTextArea cyclesText = new JTextArea("Cycles:");
+	private JTextArea cycles = new JTextArea("0");
 
 	// Konstruktor
 	public WorkTimerView() {
@@ -70,7 +72,9 @@ public class WorkTimerView extends JFrame {
 		settingsText.setFont(editorFont);
 
 		workEditor.setFont(editorFont);
+		workEditor.setEditable(false);
 		pausEditor.setFont(editorFont);
+		pausEditor.setEditable(false);
 
 		timer.setFont(timerFont);
 		timer.setEditable(false);
@@ -99,6 +103,7 @@ public class WorkTimerView extends JFrame {
 		gbc.gridy = 2;
 		frontPanel.add(pausMin, gbc);
 
+		// Set layout and add stuff to settingspanel
 		ringToneChoice.setBackground(mainColor);
 		ringToneChoice.setOpaque(true);
 		popUp.setBackground(mainColor);
@@ -106,10 +111,17 @@ public class WorkTimerView extends JFrame {
 		popUp.setEditable(false);
 		popUpCheckBox.setBackground(mainColor);
 		popUpCheckBox.setOpaque(true);
+		cyclesText.setBackground(mainColor);
+		cyclesText.setOpaque(true);
+		cyclesText.setEditable(false);
+		cycles.setBackground(mainColor);
+		cycles.setOpaque(true);
+		cycles.setEditable(false);
 
 		settingsPanel.setBackground(mainColor);
 		settingsPanel.setLayout(new GridBagLayout());
-		gbc.insets = new Insets(0, 5, 0, 5);
+		gbc.insets = new Insets(0, 4, 0, 4);
+		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		settingsPanel.add(ringToneChoice, gbc);
@@ -121,6 +133,14 @@ public class WorkTimerView extends JFrame {
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		settingsPanel.add(popUpCheckBox, gbc);
+		
+		gbc.gridx = 4;
+		gbc.gridy = 1;
+		settingsPanel.add(cyclesText, gbc);
+		
+		gbc.gridx = 5;
+		gbc.gridy = 1;
+		settingsPanel.add(cycles, gbc);
 
 		// Set layout and color and add stuff to Frame
 		setTitle("Work Timer");
@@ -227,5 +247,9 @@ public class WorkTimerView extends JFrame {
 		popUpCheckBox.setEnabled(false);
 		ringToneChoice.setEnabled(false);
 		popUp.setForeground(Color.GRAY);
+	}
+	
+	public void setCycles(int nr) {
+		cycles.setText(Integer.toString(nr));
 	}
 }

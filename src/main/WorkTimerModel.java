@@ -13,6 +13,7 @@ public class WorkTimerModel {
 	private String alarmSound;
 	private boolean popUp = false;
 	private Clip clip;
+	private int cycleCounter = 0;
 
 	// Konstruktor
 	public WorkTimerModel() {
@@ -51,6 +52,7 @@ public class WorkTimerModel {
 		} else {
 			setTime();
 			workOrNot = true;
+			cycleCounter++;
 		}
 	}
 
@@ -141,6 +143,10 @@ public class WorkTimerModel {
 
 	public void setPopUp(boolean popUp) {
 		this.popUp = popUp;
+	}
+	
+	public int getCycleCounter() {
+		return cycleCounter;
 	}
 
 }
