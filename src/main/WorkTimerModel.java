@@ -70,6 +70,7 @@ public class WorkTimerModel {
 		} else {
 			setTime();
 			workOrNot = true;
+			cycleCounter++;
 		}
 		showMessage(workOrNot);
 		clip.stop();
