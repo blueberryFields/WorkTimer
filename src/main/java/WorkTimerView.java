@@ -41,7 +41,7 @@ public class WorkTimerView extends JFrame {
 	private JTextField timer = new JTextField("");
 	private JTextArea workEditor = new JTextArea("Working time:");
 	private JTextArea pausEditor = new JTextArea("Pausing time:");
-	private Dimension buttonDimension = new Dimension(140, 50);
+	private Dimension buttonDimension = new Dimension(155, 50);
 	private boolean running = false;
 	private JPanel frontPanel = new JPanel();
 
@@ -121,7 +121,7 @@ public class WorkTimerView extends JFrame {
 		settingsPanel.setBackground(mainColor);
 		settingsPanel.setLayout(new GridBagLayout());
 		gbc.insets = new Insets(0, 4, 0, 4);
-		
+
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		settingsPanel.add(ringToneChoice, gbc);
@@ -133,11 +133,11 @@ public class WorkTimerView extends JFrame {
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		settingsPanel.add(popUpCheckBox, gbc);
-		
+
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		settingsPanel.add(cyclesText, gbc);
-		
+
 		gbc.gridx = 5;
 		gbc.gridy = 1;
 		settingsPanel.add(cycles, gbc);
@@ -248,7 +248,7 @@ public class WorkTimerView extends JFrame {
 		ringToneChoice.setEnabled(false);
 		popUp.setForeground(Color.GRAY);
 	}
-	
+
 	public void setCycles(int nr) {
 		cycles.setText(Integer.toString(nr));
 	}

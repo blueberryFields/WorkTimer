@@ -3,6 +3,7 @@ package main;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
+import java.net.URL;
 
 public class WorkTimerModel {
 	private int workingTime;
@@ -10,7 +11,7 @@ public class WorkTimerModel {
 	private Boolean workOrNot = false;
 	private int sek;
 	private int min;
-	private String alarmSound;
+	private URL alarmSound;
 	private boolean popUp = false;
 	private Clip clip;
 	private int cycleCounter = 0;
@@ -41,7 +42,7 @@ public class WorkTimerModel {
 	private void setOffAlarm() {
 		try {
 			clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+			clip.open(AudioSystem.getAudioInputStream(alarmSound));
 			clip.start();
 		} catch (Exception e) {
 			System.out.println("Error when loading audioclip");
@@ -59,10 +60,11 @@ public class WorkTimerModel {
 	private void setOffAlarmWhitPopUp() {
 		try {
 			clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(alarmSound)));
+			clip.open(AudioSystem.getAudioInputStream(alarmSound));
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (Exception e) {
 			System.out.println("Error when loading audioclip");
+			System.out.println(e);
 		}
 		if (workOrNot) {
 			setTime();
@@ -87,13 +89,13 @@ public class WorkTimerModel {
 	public void setRingTone(int index) {
 		switch (index) {
 		case 0:
-			alarmSound = "/resources/analog_ringtone.wav";
+			alarmSound = this.getClass().getClassLoader().getResource("analog_ringtone.wav");
 			break;
 		case 1:
-			alarmSound = "/resources/digital_ringtone.wav";
+			alarmSound = this.getClass().getClassLoader().getResource("digital_ringtone.wav");
 			break;
 		case 2:
-			alarmSound = "/resources/spacey_ringtone.aiff";
+			alarmSound = this.getClass().getClassLoader().getResource("spacey_ringtone.aiff");
 			break;
 		}
 	}
@@ -145,7 +147,7 @@ public class WorkTimerModel {
 	public void setPopUp(boolean popUp) {
 		this.popUp = popUp;
 	}
-	
+
 	public int getCycleCounter() {
 		return cycleCounter;
 	}
